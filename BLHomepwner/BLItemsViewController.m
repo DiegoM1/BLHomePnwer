@@ -9,19 +9,60 @@
 #import "BLItemsViewController.h"
 #import "BLItemStore.h"
 #import "BLItem.h"
+
 @interface BLItemsViewController ()
 
 @end
 
 @implementation BLItemsViewController
-
+@synthesize headerView = _headerView;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [super viewDidLoad];
-    
+  self.items = [[BLItemStore sharedStore] allItems];
+    self.highPrice = [[NSMutableArray alloc]init ];
+    self.lowPrice = [[NSMutableArray alloc] init];
+    for(int i = 0; i < self.items.count ;i++){
+    BLItem *item = self.items[i];
+    if(item.valueInDollars > 50){
+        [self.highPrice addObject:self.items[i]];
+        
+    }else{[self.lowPrice addObject:self.items[i]];}
+}
     [self.tableView registerClass:[UITableViewCell class]
            forCellReuseIdentifier:@"UITableViewCell"];
+    UIView *header = self.headerView;
+    [self.tableView setTableHeaderView:header];
+}
+- (IBAction)addNewItem:(id)sender
+{
+    NSInteger lastRow = [self.tableView numberOfRowsInSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastRow inSection:0];
+    // Insert this new row into the table.
+    [self.tableView insertRowsAtIndexPaths:@[indexPath]
+                          withRowAnimation:UITableViewRowAnimationTop];
+}
+
+- (IBAction)toggleEditingMode:(id)sender
+{// If you are currently in editing mode...
+    if (self.isEditing) {
+        // Change text of button to inform user of state
+        [sender setTitle:@"Edit" forState:UIControlStateNormal];
+        // Turn off editing mode
+        [self setEditing:NO animated:YES];
+    } else {
+        // Change text of button to inform user of state
+        [sender setTitle:@"Done" forState:UIControlStateNormal];
+        // Enter editing mode
+        [self setEditing:YES animated:YES];
+    }
+}
+-(UIView *)headerView{
+    
+    if (!_headerView){
+        [[NSBundle mainBundle]loadNibNamed:@"HeaderView" owner:self options:nil];
+    }
+    return _headerView;
 }
 -(instancetype)init{
     self = [super initWithStyle:UITableViewStylePlain];
@@ -37,91 +78,78 @@
 {
 //    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
     UITableViewCell *cell= [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
-    NSArray *items = [[BLItemStore sharedStore] allItems];
-    BLItem *item = items[indexPath.row];
-    cell.textLabel.text = [item description];
-    return cell;
-}
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [[[BLItemStore sharedStore] allItems] count];
+    
+    
+    
+  
+    if(indexPath.section == 0){
+        BLItem *item = self.highPrice[indexPath.row];
+        UIFont *font = [UIFont fontWithName:@"Arial" size:20];
+        cell.textLabel.font =font;
+        cell.textLabel.text = [item description];}
+    else if(indexPath.section == 1){
+    BLItem *itemSection2 = self.lowPrice[indexPath.row];
+            UIFont *font = [UIFont fontWithName:@"Arial" size:20];
+            cell.textLabel.font =font;
+            cell.textLabel.text = [itemSection2 description];}
+    
+    
+   
+//    for(int i = 0; i < items.count ;i++){
+//        BLItem *item = items[i];
+//
+//        if(item.valueInDollars > 50){
+//            item = items[0][indexPath.row];
+//            cell.textLabel.text = [item description];}
+//        cell.textLabel.text = [item description];
+//    }
+   return cell;
     }
+
 -(instancetype)initWithStyle:(UITableViewStyle)style{
     return [self init];
 }
-#pragma mark - Table view data source
-//-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//#warning Incomplete implementation, return the number of rows
-//    return 0;
-//}
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.section == 0 || indexPath.section == 1){
+        return 60;
+    }
+    return 44;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UILabel *label = [[UILabel alloc]init ];
+    if(section == 0){
+        
+        UIFont *font = [UIFont fontWithName:@"Arial" size:20];
+        [label setFont:font];
+        label.text = @"They cost more than 50$";}
+    else if(section == 1){
+         UIFont *font = [UIFont fontWithName:@"Arial" size:20];
+         [label setFont:font];
+         label.text = @"they cost less than 50$";}else{
+             label.text =@"No more items";}
+    return label;
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+  
+    NSInteger count = 0;
+    for(int i = 0; i < self.items.count ;i++){
+        BLItem *item = self.items[i];
+    if(item.valueInDollars > 50){
+        count++;}}
     
-    // Configure the cell...
+    if(section == 0){
+      
+        return count;
+        
+    }if(section == 1){
+    return self.items.count - count;}
     
-    return cell;
+    return 0;}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 3;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Table view delegate
-
-// In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil];
-    
-    // Pass the selected object to the new view controller.
-    
-    // Push the view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -17,6 +17,7 @@
 		79B174A8238F02E300C873FE /* BLItemsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79B174A6238F02E300C873FE /* BLItemsViewController.xib */; };
 		79B174AB238F07D900C873FE /* BLItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B174AA238F07D900C873FE /* BLItemStore.m */; };
 		79B174AE238F09AE00C873FE /* BLItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B174AD238F09AE00C873FE /* BLItem.m */; };
+		79B174B0239156B200C873FE /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79B174AF239156B200C873FE /* HeaderView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		79B174AA238F07D900C873FE /* BLItemStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLItemStore.m; sourceTree = "<group>"; };
 		79B174AC238F09AE00C873FE /* BLItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLItem.h; sourceTree = "<group>"; };
 		79B174AD238F09AE00C873FE /* BLItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLItem.m; sourceTree = "<group>"; };
+		79B174AF239156B200C873FE /* HeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				79B174AA238F07D900C873FE /* BLItemStore.m */,
 				79B174AC238F09AE00C873FE /* BLItem.h */,
 				79B174AD238F09AE00C873FE /* BLItem.m */,
+				79B174AF239156B200C873FE /* HeaderView.xib */,
 			);
 			path = BLHomepwner;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				79B1748A238F024800C873FE /* LaunchScreen.storyboard in Resources */,
+				79B174B0239156B200C873FE /* HeaderView.xib in Resources */,
 				79B174A8238F02E300C873FE /* BLItemsViewController.xib in Resources */,
 				79B17487238F024800C873FE /* Assets.xcassets in Resources */,
 				79B17485238F024600C873FE /* Main.storyboard in Resources */,

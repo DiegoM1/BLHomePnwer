@@ -11,8 +11,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BLItemsViewController : UITableViewController
+@property NSMutableArray *highPrice;
+@property NSMutableArray *lowPrice;
 
-
+@property (nonatomic, strong) IBOutlet UIView *headerView;
+@property NSArray *items;
+-(UIView *)headerView;
 @end
 
 
