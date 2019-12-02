@@ -21,6 +21,23 @@
     }
     return sharedStore;
 }
+- (void)moveItemAtIndex:(NSUInteger)fromIndex
+                toIndex:(NSUInteger)toIndex
+{
+    if (fromIndex == toIndex) {
+        return; }
+    // Get pointer to object being moved so you can re-insert it
+    BLItem *item = self.privateItems[fromIndex];
+    // Remove item from array
+    [self.privateItems removeObjectAtIndex:fromIndex];
+    // Insert item in array at new location
+    [self.privateItems insertObject:item atIndex:toIndex];
+}
+
+- (void)removeItem:(BLItem *)item
+{
+    [self.privateItems removeObjectIdenticalTo:item];
+}
 -(instancetype)init {
     @throw [NSException exceptionWithName:@"Singleton" reason:@"User + [BLItemStore sharedStore]" userInfo:nil];
     return nil;

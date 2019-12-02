@@ -18,36 +18,125 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [super viewDidLoad];
+   
     
     [self.tableView registerClass:[UITableViewCell class]
            forCellReuseIdentifier:@"UITableViewCell"];
+    
+    UIView *header = self.headerView;
+    [self.tableView setTableHeaderView:header];
 }
+- (IBAction)addNewItem:(id)sender
+{ // If you are currently in editing mode...
+    BLItem *newItem = [[BLItemStore sharedStore] createItem];
+    // Figure out where that item is in the array
+    NSInteger lastRow = [[[BLItemStore sharedStore] allItems] indexOfObject:newItem];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastRow inSection:0];
+    // Insert this new row into the table.
+    [self.tableView insertRowsAtIndexPaths:@[indexPath]
+                          withRowAnimation:UITableViewRowAnimationTop];}
+
+- (IBAction)toggleEditingMode:(id)sender
+{
+    // If you are currently in editing mode...
+    if (self.isEditing) {
+        // Change text of button to inform user of state
+        [sender setTitle:@"Edit" forState:UIControlStateNormal];
+        // Turn off editing mode
+        [self setEditing:NO animated:YES];
+    } else {
+        // Change text of button to inform user of state
+        [sender setTitle:@"Done" forState:UIControlStateNormal];
+        
+        // Enter editing mode
+        [self setEditing:YES animated:YES];
+    }}
+
+-(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //Set NSString for button display text here.
+    NSString *newTitle = @"Remove";
+    return newTitle;
+    
+}
+- (void)tableView:(UITableView *)tableView
+moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
+      toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+    [[BLItemStore sharedStore] moveItemAtIndex:sourceIndexPath.row
+                                        toIndex:destinationIndexPath.row];
+}
+- (void)tableView:(UITableView *)tableView
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    // If the table view is asking to commit a delete command...
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSArray *items = [[BLItemStore sharedStore] allItems];
+        BLItem *item = items[indexPath.row];
+        [[BLItemStore sharedStore] removeItem:item];
+        // Also remove that row from the table view with an animation
+        [tableView deleteRowsAtIndexPaths:@[indexPath]
+                         withRowAnimation:UITableViewRowAnimationFade];
+    } }
+
+
+-(UIView *)headerView
+{
+    // If you have not loaded the headerView yet...
+    if (!_headerView) {
+        [[NSBundle mainBundle] loadNibNamed:@"HeaderView" owner:self options:nil ];
+    }
+    return _headerView;}
 -(instancetype)init{
     self = [super initWithStyle:UITableViewStylePlain];
-    if(self){
+ /*  if(self){
         for (int i = 0; i < 5; i++){
             [[BLItemStore sharedStore] createItem];
-        }}
+        }}*/
         
     
     return self;
     }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+{UITableViewCell *cell= [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
 //    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
-    UITableViewCell *cell= [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
+    if(indexPath.row < [[[BLItemStore sharedStore] allItems] count]){
+        
+    
     NSArray *items = [[BLItemStore sharedStore] allItems];
     BLItem *item = items[indexPath.row];
     cell.textLabel.text = [item description];
-    return cell;
-}
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [[[BLItemStore sharedStore] allItems] count];
+        return cell;}
+    else{
+        cell.textLabel.text = @"No More Items";
+        return cell;
     }
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath{
+    if( sourceIndexPath.row == [[[BLItemStore sharedStore]allItems]count]){
+        return sourceIndexPath;
+    }
+    if (proposedDestinationIndexPath.row >= [[[BLItemStore sharedStore]allItems]count]){
+        return sourceIndexPath;
+    }
+    return proposedDestinationIndexPath;
+}
+
 -(instancetype)initWithStyle:(UITableViewStyle)style{
     return [self init];
 }
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    
+    
+        return [[[BLItemStore sharedStore] allItems] count]+1;
+    
+    }
+
+
 #pragma mark - Table view data source
 //-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 //#warning Incomplete implementation, return the number of rows

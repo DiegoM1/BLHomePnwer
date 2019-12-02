@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BLItemsViewController : UITableViewController
+@property (nonatomic, strong) IBOutlet UIView *headerView;
 
 
 @end

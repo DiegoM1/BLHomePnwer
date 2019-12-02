@@ -17,6 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 +(instancetype)sharedStore;
 -(instancetype)initPrivate;
 -(BLItem *)createItem;
+- (void)removeItem:(BLItem *)item;
+- (void)moveItemAtIndex:(NSUInteger)fromIndex
+                toIndex:(NSUInteger)toIndex;
+
 @end
 
 NS_ASSUME_NONNULL_END
