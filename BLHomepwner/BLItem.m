@@ -35,14 +35,16 @@
                                     '0' + rand() % 10];
     BLItem *newItem =
     [[self alloc] initWithItemName:randomName
-                    valueInDollars:randomValue
-                      serialNumber:randomSerialNumber];
+                     valueInDollars:randomValue
+                       serialNumber:randomSerialNumber
+                        createdDate:[[NSDate alloc]init]];
+   
     return newItem;
 }
 
 - (id)initWithItemName:(NSString *)name
         valueInDollars:(int)value
-          serialNumber:(NSString *)sNumber
+          serialNumber:(NSString *)sNumber createdDate:(NSDate *)sDate
 {
     // Call the superclass's designated initializer
     self = [super init];
@@ -52,7 +54,10 @@
         self.itemName = name;
         self.serialNumber = sNumber;
         self.valueInDollars = value;
-        
+        self.dateCreated = sDate;
+        NSUUID *uuid = [[NSUUID alloc] init];
+        NSString *key = [uuid UUIDString];
+        _itemKey = key;
     }
     
     // Return the address of the newly initialized object

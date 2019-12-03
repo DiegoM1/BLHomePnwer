@@ -8,6 +8,7 @@
 
 #import "BLItemStore.h"
 #import "BLItem.h"
+#import "BLImageStore.h"
 @interface BLItemStore ()
 @property (nonatomic) NSMutableArray *privateItems;
 
@@ -36,8 +37,11 @@
 
 - (void)removeItem:(BLItem *)item
 {
+    NSString *key = item.itemKey;
+    [[BLImageStore sharedStore] deleteImageForKey:key];
     [self.privateItems removeObjectIdenticalTo:item];
 }
+
 -(instancetype)init {
     @throw [NSException exceptionWithName:@"Singleton" reason:@"User + [BLItemStore sharedStore]" userInfo:nil];
     return nil;

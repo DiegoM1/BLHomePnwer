@@ -9,6 +9,7 @@
 #import "BLItemsViewController.h"
 #import "BLItemStore.h"
 #import "BLItem.h"
+#import "BLDetailViewController.h"
 @interface BLItemsViewController ()
 
 @end
@@ -35,22 +36,22 @@
     // Insert this new row into the table.
     [self.tableView insertRowsAtIndexPaths:@[indexPath]
                           withRowAnimation:UITableViewRowAnimationTop];}
-
-- (IBAction)toggleEditingMode:(id)sender
-{
-    // If you are currently in editing mode...
-    if (self.isEditing) {
-        // Change text of button to inform user of state
-        [sender setTitle:@"Edit" forState:UIControlStateNormal];
-        // Turn off editing mode
-        [self setEditing:NO animated:YES];
-    } else {
-        // Change text of button to inform user of state
-        [sender setTitle:@"Done" forState:UIControlStateNormal];
-        
-        // Enter editing mode
-        [self setEditing:YES animated:YES];
-    }}
+//
+//- (IBAction)toggleEditingMode:(id)sender
+//{
+//    // If you are currently in editing mode...
+//    if (self.isEditing) {
+//        // Change text of button to inform user of state
+//        [sender setTitle:@"Edit" forState:UIControlStateNormal];
+//        // Turn off editing mode
+//        [self setEditing:NO animated:YES];
+//    } else {
+//        // Change text of button to inform user of state
+//        [sender setTitle:@"Done" forState:UIControlStateNormal];
+//        
+//        // Enter editing mode
+//        [self setEditing:YES animated:YES];
+//    }}
 
 -(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -81,20 +82,46 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
                          withRowAnimation:UITableViewRowAnimationFade];
     } }
 
-
--(UIView *)headerView
+- (void)viewWillAppear:(BOOL)animated
 {
-    // If you have not loaded the headerView yet...
-    if (!_headerView) {
-        [[NSBundle mainBundle] loadNibNamed:@"HeaderView" owner:self options:nil ];
-    }
-    return _headerView;}
+    
+        [super viewWillAppear:animated];
+        [self.tableView reloadData];
+    
+}
+
+- (void)tableView:(UITableView *)tableView
+didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    BLDetailViewController *detailViewController =
+    [[BLDetailViewController alloc] init];
+    NSArray *items = [[BLItemStore sharedStore] allItems];
+    BLItem *selectedItem = items[indexPath.row];
+    detailViewController.item = selectedItem;
+    
+    // Push it onto the top of the navigation controller's stack
+    [self.navigationController pushViewController:detailViewController
+                                         animated:YES];
+}
+
+//-(UIView *)headerView
+//{
+//    // If you have not loaded the headerView yet...
+//    if (!_headerView) {
+//        [[NSBundle mainBundle] loadNibNamed:@"HeaderView" owner:self options:nil ];
+//    }
+//    return _headerView;}
 -(instancetype)init{
     self = [super initWithStyle:UITableViewStylePlain];
- /*  if(self){
-        for (int i = 0; i < 5; i++){
-            [[BLItemStore sharedStore] createItem];
-        }}*/
+   if(self){
+  UINavigationItem *navItem = self.navigationItem;
+       navItem.title = @"Homepwner";
+       UIBarButtonItem *bbi = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                              target:self
+                                                              action:@selector(addNewItem:)];
+       navItem.rightBarButtonItem = bbi;
+       navItem.leftBarButtonItem = self.editButtonItem;
+   }
         
     
     return self;

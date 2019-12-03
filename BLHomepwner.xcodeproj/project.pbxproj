@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		799FD5FC2396A70D00BF2838 /* BLImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 799FD5FB2396A70D00BF2838 /* BLImageStore.m */; };
 		79B1747F238F024600C873FE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B1747E238F024600C873FE /* AppDelegate.m */; };
 		79B17485238F024600C873FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79B17483238F024600C873FE /* Main.storyboard */; };
 		79B17487238F024800C873FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79B17486238F024800C873FE /* Assets.xcassets */; };
@@ -17,6 +18,11 @@
 		79B174A8238F02E300C873FE /* BLItemsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79B174A6238F02E300C873FE /* BLItemsViewController.xib */; };
 		79B174AB238F07D900C873FE /* BLItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B174AA238F07D900C873FE /* BLItemStore.m */; };
 		79B174AE238F09AE00C873FE /* BLItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B174AD238F09AE00C873FE /* BLItem.m */; };
+		79B174B42391754500C873FE /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79B174B32391754500C873FE /* HeaderView.xib */; };
+		79B174B82395488000C873FE /* BLDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B174B62395488000C873FE /* BLDetailViewController.m */; };
+		79B174B92395488000C873FE /* BLDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79B174B72395488000C873FE /* BLDetailViewController.xib */; };
+		79B174C0239573F900C873FE /* BLchangeDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B174BE239573F900C873FE /* BLchangeDateViewController.m */; };
+		79B174C1239573F900C873FE /* BLchangeDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79B174BF239573F900C873FE /* BLchangeDateViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		799FD5FA2396A70D00BF2838 /* BLImageStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLImageStore.h; sourceTree = "<group>"; };
+		799FD5FB2396A70D00BF2838 /* BLImageStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLImageStore.m; sourceTree = "<group>"; };
 		79B1747A238F024600C873FE /* BLHomepwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLHomepwner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79B1747D238F024600C873FE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		79B1747E238F024600C873FE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -48,6 +56,13 @@
 		79B174AA238F07D900C873FE /* BLItemStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLItemStore.m; sourceTree = "<group>"; };
 		79B174AC238F09AE00C873FE /* BLItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLItem.h; sourceTree = "<group>"; };
 		79B174AD238F09AE00C873FE /* BLItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLItem.m; sourceTree = "<group>"; };
+		79B174B32391754500C873FE /* HeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
+		79B174B52395488000C873FE /* BLDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLDetailViewController.h; sourceTree = "<group>"; };
+		79B174B62395488000C873FE /* BLDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLDetailViewController.m; sourceTree = "<group>"; };
+		79B174B72395488000C873FE /* BLDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BLDetailViewController.xib; sourceTree = "<group>"; };
+		79B174BD239573F900C873FE /* BLchangeDateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLchangeDateViewController.h; sourceTree = "<group>"; };
+		79B174BE239573F900C873FE /* BLchangeDateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLchangeDateViewController.m; sourceTree = "<group>"; };
+		79B174BF239573F900C873FE /* BLchangeDateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BLchangeDateViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +118,15 @@
 				79B174AA238F07D900C873FE /* BLItemStore.m */,
 				79B174AC238F09AE00C873FE /* BLItem.h */,
 				79B174AD238F09AE00C873FE /* BLItem.m */,
+				79B174B32391754500C873FE /* HeaderView.xib */,
+				79B174B52395488000C873FE /* BLDetailViewController.h */,
+				79B174B62395488000C873FE /* BLDetailViewController.m */,
+				79B174B72395488000C873FE /* BLDetailViewController.xib */,
+				79B174BD239573F900C873FE /* BLchangeDateViewController.h */,
+				79B174BE239573F900C873FE /* BLchangeDateViewController.m */,
+				79B174BF239573F900C873FE /* BLchangeDateViewController.xib */,
+				799FD5FA2396A70D00BF2838 /* BLImageStore.h */,
+				799FD5FB2396A70D00BF2838 /* BLImageStore.m */,
 			);
 			path = BLHomepwner;
 			sourceTree = "<group>";
@@ -197,7 +221,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				79B1748A238F024800C873FE /* LaunchScreen.storyboard in Resources */,
+				79B174B42391754500C873FE /* HeaderView.xib in Resources */,
+				79B174C1239573F900C873FE /* BLchangeDateViewController.xib in Resources */,
 				79B174A8238F02E300C873FE /* BLItemsViewController.xib in Resources */,
+				79B174B92395488000C873FE /* BLDetailViewController.xib in Resources */,
 				79B17487238F024800C873FE /* Assets.xcassets in Resources */,
 				79B17485238F024600C873FE /* Main.storyboard in Resources */,
 			);
@@ -218,10 +245,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				79B174AE238F09AE00C873FE /* BLItem.m in Sources */,
+				79B174B82395488000C873FE /* BLDetailViewController.m in Sources */,
 				79B174AB238F07D900C873FE /* BLItemStore.m in Sources */,
 				79B174A7238F02E300C873FE /* BLItemsViewController.m in Sources */,
 				79B1748D238F024800C873FE /* main.m in Sources */,
+				79B174C0239573F900C873FE /* BLchangeDateViewController.m in Sources */,
 				79B1747F238F024600C873FE /* AppDelegate.m in Sources */,
+				799FD5FC2396A70D00BF2838 /* BLImageStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,6 +410,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2U49T83TPH;
 				INFOPLIST_FILE = BLHomepwner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -396,6 +427,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2U49T83TPH;
 				INFOPLIST_FILE = BLHomepwner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
